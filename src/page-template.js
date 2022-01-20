@@ -70,7 +70,7 @@ const engineerHTML = (engineerData) => {
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineerData.id}</li>
       <li class="list-group-item">Email: <a href="mailto:${engineerData.email}">${engineerData.email}</a></li>
-      <li class="list-group-item">Github: <a href="https://github.com/${engineerData.github}">${engineerData.github}</a></li>
+      <li class="list-group-item">Github: <a href="https://www.github.com/${engineerData.github}" target="_blank">${engineerData.github}</a></li>
     </ul>
   </div>
 </div>`;
@@ -90,7 +90,6 @@ const generateNewPage = (data) => {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-
 <body>
   <header>
     <h1 class="text-center pt-4 bg-danger bg-gradient text-light">My Team</h1>
