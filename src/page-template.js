@@ -1,29 +1,29 @@
+const Manager = require('../lib/Manager');
+const Engineer = require('../lib/Engineer')
+const Intern = require('../lib/Intern')
+
 //iterate through data and push to array
 const generateTeam = (team) => {
-  const html = []
+  const cardsArray = []
   for (let i = 0; i < team.length; i++) {
-    switch (team[i].getRole()) {
+    const newArray = team[i];
+    switch (newArray.getRole()) {
       case "Manager":
-        html.push(managerHTML(team[i]));
+        const manager = new Manager(newArray.name, newArray.id, newArray.email, newArray.officeNumber)
+        cardsArray.push(managerHTML(manager));
         break;
       case "Intern":
-        html.push(internHTML(team[i]));
+        const intern = new Intern(newArray.name, newArray.id, newArray.email, newArray.school);
+        cardsArray.push(internHTML(intern));
         break;
       case "Engineer":
-        html.push(engineerHTML(team[i]));
+        const engineer = new Engineer(newArray.name, newArray.id, newArray.email, newArray.github);
+        cardsArray.push(engineerHTML(engineer));
         break;
     }
   }
-  console.log(team)
-  const dataCards = html.join('');
+  return cardsArray.join('');
 };
-
-// join the cases together
-
-
-//return back to index.js
-// const teamPage = generateNewPage(dataCards);
-// return teamPage;
 
 const managerHTML = (managerData) => {
   return `
@@ -35,7 +35,7 @@ const managerHTML = (managerData) => {
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${managerData.id}</li>
-          <li class="list-group-item">Email: ${managerData.email}</li>
+          <li class="list-group-item">Email: <a href="mailto:${managerData.email}">${managerData.email}</a></li>
           <li class="list-group-item">Office number: ${managerData.officeNumber}</li>
         </ul>
       </div>
@@ -52,7 +52,7 @@ const internHTML = (internData) => {
         </div>
         <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${internData.id}</li>
-        <li class="list-group-item">Email: ${internData.email}</li>
+        <li class="list-group-item">Email: <a href="mailto:${internData.email}">${internData.email}</a></li>
         <li class="list-group-item">School: ${internData.school}</li>
         </ul>
       </div>
@@ -69,15 +69,15 @@ const engineerHTML = (engineerData) => {
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineerData.id}</li>
-      <li class="list-group-item">Email: ${engineerData.email}</li>
-      <li class="list-group-item">Github: ${engineerData.github}</li>
+      <li class="list-group-item">Email: <a href="mailto:${engineerData.email}">${engineerData.email}</a></li>
+      <li class="list-group-item">Github: <a href="https://github.com/${engineerData.github}">${engineerData.github}</a></li>
     </ul>
   </div>
 </div>`;
 }
 
 //make the HTML page
-const generateNewPage = function (data) {
+const generateNewPage = (data) => {
   return `
   <!DOCTYPE html>
 <html lang="en">
@@ -95,10 +95,10 @@ const generateNewPage = function (data) {
   <header>
     <h1 class="text-center pt-4 bg-danger bg-gradient text-light">My Team</h1>
   </header>
-  <main class="col-12 justify-content-center d-flex">
+  <main class="col-12 justify-content-center d-flex flex-wrap">
   ${generateTeam(data)}
   </main>
 </body>`;
 };
 
-module.exports = generateTeam;
+module.exports = generateNewPage;
